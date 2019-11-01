@@ -15,6 +15,7 @@ func GetAuthOptions() (AuthOptions, error) {
 
     viper.SetConfigName("config")
     viper.AddConfigPath("./")
+    viper.AddConfigPath("../") // This is needed to run the tests
     viper.AutomaticEnv()
     viper.SetConfigType("yml")
 
