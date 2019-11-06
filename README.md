@@ -12,7 +12,7 @@ Add to your environment
 
 ```export YELP_API_KEY="<YOUR YELP V3 API KEY>"```
 
-```go run main.go```
+```go run examples.go```
 
 ```go test github.com/steveperjesi/go-yelp-v3/yelp -cover```
 
