@@ -10,23 +10,19 @@ type AuthOptions struct {
     ApiKey string `json:"api_key"`
 }
 
-func GetAuthOptions() (AuthOptions, error) {
-    authOptions := AuthOptions{}
-
+func GetApiKey() (string, error) {
     viper.SetConfigName("config")
     viper.AddConfigPath("./")
     viper.AddConfigPath("../") // This is needed to run the tests
     viper.AutomaticEnv()
     viper.SetConfigType("yml")
 
-    fmt.Println(viper.ConfigFileUsed())
-
     if err := viper.ReadInConfig(); err != nil {
         fmt.Printf("Error reading config file, %s", err)
-        return authOptions, err
+        return "", err
     }
 
-    authOptions.ApiKey = viper.GetString("YELP_API_KEY")
+    apiKey := viper.GetString("YELP_V3_API_KEY")
 
-    return authOptions, nil
+    return apiKey, nil
 }
