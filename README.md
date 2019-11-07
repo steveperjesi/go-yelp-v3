@@ -10,10 +10,10 @@ or
 
 Add to your environment
 
-```export YELP_API_KEY="<YOUR YELP V3 API KEY>"```
+```export YELP_V3_API_KEY="<YOUR YELP V3 API KEY>"```
 
 ```go run examples.go```
 
 ```go test github.com/steveperjesi/go-yelp-v3/yelp -cover```
 
-_ok  	github.com/steveperjesi/go-yelp-v3/yelp	6.430s	**coverage: 91.9%** of statements_
+_ok  	github.com/steveperjesi/go-yelp-v3/yelp	6.946s	**coverage: 91.5%** of statements_
