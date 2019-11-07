@@ -48,10 +48,7 @@ func (client *Client) Search(request SearchOptions) (SearchResponse, error) {
     var endpoint bytes.Buffer
     endpoint.WriteString("/businesses/search?")
 
-    if request.Term == "" {
-        err := errors.New("Search term cannot be empty")
-        return SearchResponse{}, err
-    } else {
+    if request.Term != "" {
         term := strings.Join(strings.Split(request.Term, " "), "+")
         endpoint.WriteString(fmt.Sprintf("term=%s", term))
     }

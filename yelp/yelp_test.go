@@ -14,6 +14,8 @@ const (
     badLon            = -0.32801
     locationCity      = "denver"
     locationCityState = "las vegas, nv"
+    goodAddress       = "1060 W Addison, Chicago, IL"
+    badAddress        = "Sandlot, 1234 street, Timbucktoo"
 )
 
 func TestYelpBadKey(t *testing.T) {
@@ -152,9 +154,8 @@ func TestYelpOpenNow(t *testing.T) {
     assert.True(len(results.Businesses) <= 50)
 }
 
-func TestYelpMissingTerm(t *testing.T) {
+func TestYelpAddressGood(t *testing.T) {
     assert := assert.New(t)
-
     apiKey, err := GetApiKey()
     assert.NoError(err)
 
@@ -163,13 +164,32 @@ func TestYelpMissingTerm(t *testing.T) {
 
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
-        Term:       "",
-        Latitude:   goodLat,
-        Longitude:  goodLon,
-        Categories: "localservices",
-        OpenNow:    false,
+        Location: goodAddress,
+        SortBy:   "distance",
+        Limit:    50,
     })
-    assert.EqualError(err, "Search term cannot be empty")
+    assert.NoError(err)
+    assert.NotNil(results)
+    assert.True(results.Total > 0)
+    assert.True(len(results.Businesses) > 0)
+    assert.True(len(results.Businesses) <= 50)
+}
+
+func TestYelpAddressBad(t *testing.T) {
+    assert := assert.New(t)
+    apiKey, err := GetApiKey()
+    assert.NoError(err)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
+    assert.NotNil(client)
+    results, err := client.Search(SearchOptions{
+        Location: badAddress,
+        SortBy:   "distance",
+        Limit:    50,
+    })
+    assert.Error(err)
     assert.NotNil(results)
 }
 
