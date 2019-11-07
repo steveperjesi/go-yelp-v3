@@ -19,11 +19,9 @@ const (
 func TestYelpBadKey(t *testing.T) {
     assert := assert.New(t)
 
-    authOptions, err := GetAuthOptions()
+    client, err := NewClient("XYZ")
     assert.NoError(err)
 
-    authOptions.ApiKey = "XYZ"
-    client := NewClient(authOptions)
     assert.NotNil(client)
     _, err = client.Search(SearchOptions{
         Term:       "restaurants",
@@ -37,9 +35,12 @@ func TestYelpBadKey(t *testing.T) {
 
 func TestYelpLocation(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "child care",
@@ -57,9 +58,13 @@ func TestYelpLocation(t *testing.T) {
 
 func TestYelpLatLong(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "plumbers",
@@ -77,9 +82,13 @@ func TestYelpLatLong(t *testing.T) {
 
 func TestYelpRadius(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "auto repair",
@@ -98,9 +107,13 @@ func TestYelpRadius(t *testing.T) {
 
 func TestYelpNoResults(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "salamander",
@@ -118,9 +131,13 @@ func TestYelpNoResults(t *testing.T) {
 
 func TestYelpOpenNow(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:      "hvac",
@@ -137,9 +154,13 @@ func TestYelpOpenNow(t *testing.T) {
 
 func TestYelpMissingTerm(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "",
@@ -155,9 +176,13 @@ func TestYelpMissingTerm(t *testing.T) {
 func TestYelpOpenAt(t *testing.T) {
     now := int(int32(time.Now().Unix()))
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "lawn care",
@@ -175,9 +200,13 @@ func TestYelpOpenAt(t *testing.T) {
 
 func TestYelpBadLat(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "septic",
@@ -191,9 +220,13 @@ func TestYelpBadLat(t *testing.T) {
 
 func TestYelpBadLon(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "hotel",
@@ -207,9 +240,13 @@ func TestYelpBadLon(t *testing.T) {
 
 func TestYelpMissingLocation(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "roofer",
@@ -221,9 +258,13 @@ func TestYelpMissingLocation(t *testing.T) {
 
 func TestYelpLocale(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:      "ear nose throat",
@@ -240,9 +281,13 @@ func TestYelpLocale(t *testing.T) {
 
 func TestYelpOffset(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:      "taxi",
@@ -259,9 +304,13 @@ func TestYelpOffset(t *testing.T) {
 
 func TestYelpPrice(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:      "contractor",
@@ -278,9 +327,13 @@ func TestYelpPrice(t *testing.T) {
 
 func TestYelpAttributes(t *testing.T) {
     assert := assert.New(t)
-    authOptions, err := GetAuthOptions()
+
+    apiKey, err := GetApiKey()
     assert.NoError(err)
-    client := NewClient(authOptions)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
     assert.NotNil(client)
     results, err := client.Search(SearchOptions{
         Term:       "dentist",
@@ -293,4 +346,34 @@ func TestYelpAttributes(t *testing.T) {
     assert.True(results.Total > 0)
     assert.True(len(results.Businesses) > 0)
     assert.True(len(results.Businesses) <= 50)
+}
+
+func TestYelpCategories(t *testing.T) {
+    assert := assert.New(t)
+
+    apiKey, err := GetApiKey()
+    assert.NoError(err)
+
+    client, err := NewClient(apiKey)
+    assert.NoError(err)
+
+    assert.NotNil(client)
+    results, err := client.Search(SearchOptions{
+        Term:      "attorney",
+        Latitude:  goodLat,
+        Longitude: goodLon,
+    })
+    assert.NoError(err)
+    assert.NotNil(results)
+    assert.True(results.Total > 0)
+    assert.True(len(results.Businesses) > 0)
+    assert.True(len(results.Businesses) <= 50)
+
+    for _, biz := range results.Businesses {
+        if len(biz.Categories) > 0 {
+            cats := CategoriesToString(biz.Categories)
+            assert.True(len(cats) > 0)
+        }
+    }
+
 }
