@@ -12,8 +12,8 @@ Add to your environment
 
 ```export YELP_V3_API_KEY="<YOUR YELP V3 API KEY>"```
 
-```go run examples.go```
+```go run examples/*.go```
 
-```go test github.com/steveperjesi/go-yelp-v3/yelp -cover```
+```go test yelp/* -cover```
 
-_ok  	github.com/steveperjesi/go-yelp-v3/yelp	6.946s	**coverage: 91.5%** of statements_
+_ok  	command-line-arguments	6.946s	**coverage: 91.5%** of statements_
