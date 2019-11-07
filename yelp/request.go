@@ -9,8 +9,12 @@ import (
     "net/http"
 )
 
+const (
+    baseUrl = "https://api.yelp.com/v3"
+)
+
 func (client *Client) request(method string, endpoint string, params map[string]interface{}, response interface{}) error {
-    url := fmt.Sprintf("https://api.yelp.com/v3%s", endpoint)
+    url := fmt.Sprintf(baseUrl+"%s", endpoint)
 
     httpClient := &http.Client{}
     paramsAsBytes, err := json.Marshal(params)
