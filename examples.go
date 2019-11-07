@@ -2,19 +2,21 @@ package main
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/steveperjesi/go-yelp-v3/yelp"
 )
 
 func main() {
-	authOptions, err := yelp.GetAuthOptions()
+	apiKey, err := yelp.GetApiKey()
 	if err != nil {
 		panic(err)
 	}
 
-	client := yelp.NewClient(authOptions)
-	client.Debug = true
+	client, err := yelp.NewClient(apiKey)
+	if err != nil {
+		panic(err)
+	}
+
 	results, err := client.Search(yelp.SearchOptions{
 		Term:      "restaurants",
 		Latitude:  36.0813328,
@@ -35,10 +37,8 @@ func main() {
 		panic(err)
 	}
 
-	total := results.Total
-	region := results.Region
-	fmt.Println("\nTOTAL: ", total)
-	fmt.Println("\nREGION: ", region)
+	fmt.Println("\nTOTAL: ", results.Total)
+	fmt.Println("\nREGION: ", results.Region)
 
 	for _, biz := range results.Businesses {
 		fmt.Println("Name\t\t", biz.Name)
@@ -63,23 +63,8 @@ func main() {
 		fmt.Println("ZipCode\t\t", biz.Location.ZipCode)
 		fmt.Println("Country\t\t", biz.Location.Country)
 
-		cats := CategoriesToString(biz.Categories)
+		cats := yelp.CategoriesToString(biz.Categories)
 		fmt.Println("Categories\t", cats)
 		fmt.Println("-----")
 	}
-}
-
-func CategoriesToString(cats []yelp.Category) string {
-
-	result := []string{}
-
-	for _, cat := range cats {
-		if cat.Title != "" {
-			result = append(result, cat.Title)
-		}
-	}
-
-	joined := strings.Join(result, ",")
-
-	return joined
 }
